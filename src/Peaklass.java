@@ -16,7 +16,7 @@ public class Peaklass {
             try {
                 fail.createNewFile();
             } catch (Exception e) {
-                System.out.println("Tekkis viga faili loomisel");
+                System.out.println("Tekkis viga faili loomisel!");
             }
         }
         System.out.println("Tere! Oled kasutamas to-do list'i ehk täitmist vajavate ülesannete nimekirja.");
@@ -32,10 +32,10 @@ public class Peaklass {
                 Scanner kasutajaSisend = new Scanner(System.in);
                 System.out.println("Mida soovid järgmiseks teha? Sisesta 7, et uuesti näha kõiki valikuid.");
                 valik = Integer.parseInt(kasutajaSisend.nextLine());
-                System.out.println();
+                //System.out.println();
             } catch (Exception e) {
                 System.out.println("Vigane sisend, sisesta vaid number.");
-                System.out.println();
+                //System.out.println();
             }
 
             switch (valik) {
@@ -99,6 +99,7 @@ public class Peaklass {
                     } else {
                         System.out.println("Oled programmist väljunud. Hüvasti!");
                         loop = false;
+                        break;
                     }
 
                 case 7:

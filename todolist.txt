@@ -1,2 +1,2 @@
-too piima
-lõpeta OOPi projekt
+lõpeta OOPi projekt;1
+too piima;0

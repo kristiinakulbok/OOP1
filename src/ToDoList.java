@@ -12,17 +12,22 @@ public class ToDoList {
     public void lisaUusKirje() {
         Scanner sisend = new Scanner(System.in);
         System.out.println("Kas see ülesanne on elulise tähtsusega? (jah/ei) ");
-        if (sisend.nextLine().equals("jah")) {
+        String jahVõiEi = sisend.nextLine();
+        if (jahVõiEi.equals("jah")) {
             System.out.println("Mida soovid lisada? ");
             Ülesanne lisatudÜlesanne = new Ülesanne(sisend.nextLine(), true);
             toDoList.add(lisatudÜlesanne);
             System.out.println("Uus kirje lisatud!");
-
-        } else if (sisend.nextLine().equals("ei")) {
+        }
+        else if (jahVõiEi.equals("ei")) {
             System.out.println("Mida soovid lisada? ");
             Ülesanne lisatudÜlesanne = new Ülesanne(sisend.nextLine(), false);
             toDoList.add(lisatudÜlesanne);
             System.out.println("Uus kirje lisatud!");
+        }
+        else{
+            System.out.println("Vigane sisend, proovi uuesti!");
+            lisaUusKirje();
         }
     }
 
@@ -72,7 +77,14 @@ public class ToDoList {
     public void salvesta(File fail) {
         try (java.io.PrintWriter pw = new java.io.PrintWriter(fail, "UTF-8")) {
             for (int i = 0; i < toDoList.size(); i++) {
-                pw.println(toDoList.get(i));
+                Ülesanne temp = toDoList.get(i);
+                pw.print(temp);
+                if (temp.isTähtis() == true){
+                    pw.println(";1");
+                }
+                else {
+                    pw.println(";0");
+                }
             }
             System.out.println("Ülesannete nimekiri salvestatud.");
         } catch (Exception e) {
@@ -104,8 +116,16 @@ public class ToDoList {
         try (java.util.Scanner sc = new java.util.Scanner(fail, "UTF-8")) {
             while (sc.hasNextLine()) {
                 String rida = sc.nextLine();
-                Ülesanne ülesanneFailist = new Ülesanne(rida);
-                toDoList.add(ülesanneFailist);
+                String jupid[] = rida.split(";");
+                int tempint = Integer.parseInt(jupid[1]); //String tüüpide võrdlemine ei töötanud, aga see töötab miskipärast
+                if (tempint == 1) {
+                    Ülesanne ülesanneFailist = new Ülesanne(jupid[0],true);
+                    toDoList.add(ülesanneFailist);
+                }
+                if (tempint == 0) {
+                    Ülesanne ülesanneFailist = new Ülesanne(jupid[0],false);
+                    toDoList.add(ülesanneFailist);
+                }
             }
         } catch (Exception e) {
             System.out.println("Tekkis viga faili lugemisel.");
@@ -114,23 +134,24 @@ public class ToDoList {
 
     //loetavuse parandamiseks
     public void eraldaja() {
-        String s = "*";
+        String s = "-";
         int n = 64;
-        System.out.println();
+        //System.out.println();
         StringBuilder sb = new StringBuilder(s.length() * n);
         for (int i = 0; i < n; i++)
             sb.append(s);
         System.out.println(sb.toString());
-        System.out.println();
+        //System.out.println();
     }
 
     public void kuvaValikud() {
-        System.out.println("Sisesta 1, et lisada uus ülesanne");
-        System.out.println("Sisesta 2, et eemaldada mingi ülesanne nimekirjast");
-        System.out.println("Sisesta 3, et lasta fortuunal otsustada järgmine tegevus");
-        System.out.println("Sisesta 4, et kuvada kõik hetkel nimekirjas olevad ülesanded");
-        System.out.println("Sisesta 5, et salvestada praegune to-do list");
-        System.out.println("Sisesta 6, et programmist väljuda");
+        System.out.println("Sisesta 1, et lisada uus ülesanne.");
+        System.out.println("Sisesta 2, et eemaldada mingi ülesanne nimekirjast.");
+        System.out.println("Sisesta 3, et lasta fortuunal otsustada järgmine tegevus.");
+        System.out.println("Sisesta 4, et kuvada kõik hetkel nimekirjas olevad ülesanded.");
+        System.out.println("Sisesta 5, et salvestada praegune to-do list.");
+        System.out.println("Sisesta 6, et programmist väljuda.");
+        eraldaja();
     }
 
 }
