@@ -108,4 +108,15 @@ public class ToDoList {
         System.out.println(sb.toString());
         System.out.println();
     }
+
+    public void kuvaValikud(){
+        System.out.println("Sisesta 1, et lisada uus ülesanne");
+        System.out.println("Sisesta 2, et märkida mingi ülesanne tehtuks");
+        System.out.println("Sisesta 3, et eemaldada mingi ülesanne nimekirjast");
+        System.out.println("Sisesta 4, et lasta fortuunal otsustada järgmine tegevus");
+        System.out.println("Sisesta 5, et kuvada kõik hetkel nimekirjas olevad ülesanded");
+        System.out.println("Sisesta 6, et salvestada praegune to-do list");
+        System.out.println("Sisesta 7, et programmist väljuda");
+    }
+
 }

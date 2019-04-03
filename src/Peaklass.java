@@ -22,13 +22,7 @@ public class Peaklass {
             }
         }
         System.out.println("Tere! Oled kasutamas to-do list'i ehk täitmist vajavate ülesannete nimekirja.");
-        System.out.println("Sisesta 1, et lisada uus ülesanne");
-        System.out.println("Sisesta 2, et märkida mingi ülesanne tehtuks");
-        System.out.println("Sisesta 3, et eemaldada mingi ülesanne nimekirjast");
-        System.out.println("Sisesta 4, et lasta fortuunal otsustada järgmine tegevus");
-        System.out.println("Sisesta 5, et kuvada kõik hetkel nimekirjas olevad ülesanded");
-        System.out.println("Sisesta 6, et salvestada praegune to-do list");
-        System.out.println("Sisesta 7, et programmist väljuda");
+        toDoList.kuvaValikud();
 
         boolean loop = true; // selle jaoks, et programm töötaks peale ühe käsu täitmist.
         boolean salvestatud = true; // kontrollimaks, kas muudatused on salvestatud
@@ -38,7 +32,7 @@ public class Peaklass {
 
             try {
                 Scanner kasutajaSisend = new Scanner(System.in);
-                System.out.println("Mida soovid järgmiseks teha? ");
+                System.out.println("Mida soovid järgmiseks teha? Sisesta 8, et uuesti näha kõiki valikuid.");
                 valik = Integer.parseInt(kasutajaSisend.nextLine());
                 System.out.println();
             } catch (Exception e) {
@@ -83,12 +77,39 @@ public class Peaklass {
 
                 case 7:
                     if (!salvestatud) {
-                        System.out.println("Praegune list on salvestamata!");
+                        System.out.println("Praegune list on salvestamata! 1 - Salvesta ja välju.");
+                        System.out.println("                               2 - Välju salvestamata.");
+                        System.out.println("                               3 - Tühista.");
+                        try{
+                            Scanner kasutajaSisend = new Scanner(System.in);
+                            valik = Integer.parseInt(kasutajaSisend.nextLine());
+                            switch (valik){
+                                case 1:
+                                    toDoList.salvesta(fail);
+                                    loop = false;
+                                    System.out.println("Oled programmist väljunud. Hüvasti!");
+                                    break;
+
+                                case 2:
+                                    loop = false;
+                                    System.out.println("Oled programmist väljunud. Hüvasti!");
+                                    break;
+
+                                case 3:
+                                    break;
+                            }
+                        } catch (Exception e){
+                            System.out.println("Vigane sisend!");
+                        }
                         break;
                     } else {
                         System.out.println("Oled programmist väljunud. Hüvasti!");
                         loop = false;
                     }
+
+                case 8:
+                    toDoList.kuvaValikud();
+                    break;
             }
         }
     }
