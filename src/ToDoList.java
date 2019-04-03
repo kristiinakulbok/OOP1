@@ -4,22 +4,31 @@ import java.util.Scanner;
 
 public class ToDoList {
 
-    ArrayList<String> toDoList = new ArrayList<String>();
+    ArrayList<Ülesanne> toDoList = new ArrayList<>();
 
     //case 1
     public void lisaUusKirje() {
         Scanner sisend = new Scanner(System.in);
-        System.out.println("Mida soovid lisada? ");
-        String ülesanne = sisend.nextLine();
-        toDoList.add(ülesanne);
-        System.out.println("Uus kirje lisatud!");
+        System.out.println("Kas see ülesanne on elulise tähtsusega? (jah/ei) ");
+        if (sisend.nextLine().equals("jah")) {
+            System.out.println("Mida soovid lisada? ");
+            Ülesanne lisatudÜlesanne = new Ülesanne(sisend.nextLine(), true);
+            toDoList.add(lisatudÜlesanne);
+            System.out.println("Uus kirje lisatud!");
+
+        } else if (sisend.nextLine().equals("ei")) {
+            System.out.println("Mida soovid lisada? ");
+            Ülesanne lisatudÜlesanne = new Ülesanne(sisend.nextLine(), false);
+            toDoList.add(lisatudÜlesanne);
+            System.out.println("Uus kirje lisatud!");
+        }
     }
 
     //case 3
     public String eemaldaÜlesanne() {
         if (toDoList.isEmpty()) {
             System.out.println("See list on juba tühi.");
-            return null; //kohmakas lahendus, aga tagastustüüp void ei sobinud rekursiooniga
+            return null; //kohmakas lahendus, aga tagastustüüp void ei sobinud rekursiooniga, teisiti ei osanud
         } else {
             listiPrint();
             Scanner eemaldatav = new Scanner(System.in);
@@ -69,7 +78,7 @@ public class ToDoList {
         }
     }
 
-    private void listiPrint() { // eemaldasin duplikaat koodi, selle eest kaotab punkte vist
+    private void listiPrint() {
         System.out.println("Listis on " + toDoList.size() + " kirje(t): ");
         for (int i = 0; i < toDoList.size(); i++) {
             System.out.println(i + 1 + ". " + toDoList.get(i));
@@ -80,7 +89,8 @@ public class ToDoList {
         try (java.util.Scanner sc = new java.util.Scanner(fail, "UTF-8")) {
             while (sc.hasNextLine()) {
                 String rida = sc.nextLine();
-                toDoList.add(rida);
+                Ülesanne ülesanneFailist = new Ülesanne(rida);
+                toDoList.add(ülesanneFailist);
             }
         } catch (Exception e) {
             System.out.println("Tekkis viga faili lugemisel.");

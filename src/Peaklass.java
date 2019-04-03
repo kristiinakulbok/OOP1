@@ -1,7 +1,8 @@
 // tegemata: case 2 (ülesande tehtuks märkimine) või on see üleliigne, sest tegelikult saavutab sama asja ka
 // ülesande nimekirjast eemaldamisega?
-// konstruktorid, get ja set meetodid
-// ülesannete prioritiseerimine
+// case 1: erindi võiks ka sinna lisada valet sisendit püüdma
+// listiPrint vaja kohandada eri prioriteediga ülesannete jaoks, olema peaks vist uus meetod sorteeri
+// probleem: failist lugemisel ei ole teada, kas ülesanne on elulise tähtsusega või mitte
 
 import java.io.File;
 import java.util.Scanner;
@@ -30,7 +31,7 @@ public class Peaklass {
         System.out.println("Sisesta 7, et programmist väljuda");
 
         boolean loop = true; // selle jaoks, et programm töötaks peale ühe käsu täitmist.
-        boolean salvestatud = true;
+        boolean salvestatud = true; // kontrollimaks, kas muudatused on salvestatud
 
         while (loop) {
             int valik = 0;
@@ -44,8 +45,6 @@ public class Peaklass {
                 System.out.println("Vigane sisend, sisesta vaid number.");
                 System.out.println();
             }
-
-            //Tegin selle osa korda for loopiga, nüüd programm jääb käima
 
             switch (valik) {
                 case 1:
