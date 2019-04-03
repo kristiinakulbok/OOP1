@@ -1,5 +1,7 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class ToDoList {
@@ -24,7 +26,7 @@ public class ToDoList {
         }
     }
 
-    //case 3
+    //case 2
     public String eemaldaÜlesanne() {
         if (toDoList.isEmpty()) {
             System.out.println("See list on juba tühi.");
@@ -45,7 +47,7 @@ public class ToDoList {
         }
     }
 
-    //case 4
+    //case 3
     public void loosiÜlesanne() {
         if (toDoList.isEmpty()) {
             System.out.println("List on tühi. Sul ei ole midagi teha.");
@@ -57,7 +59,7 @@ public class ToDoList {
         }
     }
 
-    //case 5
+    //case 4
     public void väljastaLisatudKirjed() {
         if (toDoList.isEmpty()) {
             System.out.println("List on tühi.");
@@ -66,7 +68,7 @@ public class ToDoList {
         }
     }
 
-    //case 6
+    //case 5
     public void salvesta(File fail) {
         try (java.io.PrintWriter pw = new java.io.PrintWriter(fail, "UTF-8")) {
             for (int i = 0; i < toDoList.size(); i++) {
@@ -78,10 +80,23 @@ public class ToDoList {
         }
     }
 
+    public void sorteeri() {
+        Collections.sort(toDoList, new Comparator<Ülesanne>() {
+            public int compare(Ülesanne a, Ülesanne b) {
+                return Boolean.compare(b.isTähtis(), a.isTähtis());
+            }
+        });
+    }
+
     private void listiPrint() {
-        System.out.println("Listis on " + toDoList.size() + " kirje(t): ");
+        System.out.println("Listis on " + toDoList.size() + " kirje(t), tähtsamad eespool: ");
         for (int i = 0; i < toDoList.size(); i++) {
-            System.out.println(i + 1 + ". " + toDoList.get(i));
+            if (toDoList.get(i).isTähtis()) {
+                System.out.println(i + 1 + ". " + toDoList.get(i));
+            }
+            if (toDoList.get(i).isTähtis() == false){
+                System.out.println(i + 1 + ". " + toDoList.get(i));
+            }
         }
     }
 
@@ -109,14 +124,13 @@ public class ToDoList {
         System.out.println();
     }
 
-    public void kuvaValikud(){
+    public void kuvaValikud() {
         System.out.println("Sisesta 1, et lisada uus ülesanne");
-        System.out.println("Sisesta 2, et märkida mingi ülesanne tehtuks");
-        System.out.println("Sisesta 3, et eemaldada mingi ülesanne nimekirjast");
-        System.out.println("Sisesta 4, et lasta fortuunal otsustada järgmine tegevus");
-        System.out.println("Sisesta 5, et kuvada kõik hetkel nimekirjas olevad ülesanded");
-        System.out.println("Sisesta 6, et salvestada praegune to-do list");
-        System.out.println("Sisesta 7, et programmist väljuda");
+        System.out.println("Sisesta 2, et eemaldada mingi ülesanne nimekirjast");
+        System.out.println("Sisesta 3, et lasta fortuunal otsustada järgmine tegevus");
+        System.out.println("Sisesta 4, et kuvada kõik hetkel nimekirjas olevad ülesanded");
+        System.out.println("Sisesta 5, et salvestada praegune to-do list");
+        System.out.println("Sisesta 6, et programmist väljuda");
     }
 
 }

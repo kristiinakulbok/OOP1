@@ -1,5 +1,3 @@
-// tegemata: case 2 (ülesande tehtuks märkimine) või on see üleliigne, sest tegelikult saavutab sama asja ka
-// ülesande nimekirjast eemaldamisega?
 // case 1: erindi võiks ka sinna lisada valet sisendit püüdma
 // listiPrint vaja kohandada eri prioriteediga ülesannete jaoks, olema peaks vist uus meetod sorteeri
 // probleem: failist lugemisel ei ole teada, kas ülesanne on elulise tähtsusega või mitte
@@ -32,7 +30,7 @@ public class Peaklass {
 
             try {
                 Scanner kasutajaSisend = new Scanner(System.in);
-                System.out.println("Mida soovid järgmiseks teha? Sisesta 8, et uuesti näha kõiki valikuid.");
+                System.out.println("Mida soovid järgmiseks teha? Sisesta 7, et uuesti näha kõiki valikuid.");
                 valik = Integer.parseInt(kasutajaSisend.nextLine());
                 System.out.println();
             } catch (Exception e) {
@@ -48,34 +46,30 @@ public class Peaklass {
                     break;
 
                 case 2:
-                    System.out.println("null"); // ei tee midagi
-                    toDoList.eraldaja();
-                    salvestatud = false;
-                    break;
-
-                case 3:
                     toDoList.eemaldaÜlesanne();
                     toDoList.eraldaja();
                     salvestatud = false;
                     break;
 
-                case 4:
+                case 3:
                     toDoList.loosiÜlesanne();
                     toDoList.eraldaja();
                     break;
 
-                case 5:
+                case 4:
+                    toDoList.sorteeri();
                     toDoList.väljastaLisatudKirjed();
                     toDoList.eraldaja();
                     break;
 
-                case 6:
+                case 5:
+                    toDoList.sorteeri();
                     toDoList.salvesta(fail);
                     toDoList.eraldaja();
                     salvestatud = true;
                     break;
 
-                case 7:
+                case 6:
                     if (!salvestatud) {
                         System.out.println("Praegune list on salvestamata! 1 - Salvesta ja välju.");
                         System.out.println("                               2 - Välju salvestamata.");
@@ -107,7 +101,7 @@ public class Peaklass {
                         loop = false;
                     }
 
-                case 8:
+                case 7:
                     toDoList.kuvaValikud();
                     break;
             }
